@@ -118,7 +118,7 @@ const Board = () => {
             <option>High</option>
           </select>
           <input
-            type="date"
+            type="datetime-local"
             value={newTask.deadline}
             onChange={(e) =>
               setNewTask({ ...newTask, deadline: e.target.value })
