@@ -158,17 +158,37 @@ const Board = () => {
                           <span className="priority-badge">
                             {task.priority}
                           </span>
-                          {task.deadline && (
-                            <p
-                              className={`deadline ${new Date(task.deadline) < new Date() && task.status !== "done" ? "overdue" : ""}`}
-                            >
-                              📅 {new Date(task.deadline).toLocaleDateString()}
-                              {new Date(task.deadline) < new Date() &&
-                              task.status !== "done"
-                                ? " ⚠️ Overdue"
-                                : ""}
-                            </p>
-                          )}
+                          {task.deadline &&
+                            (() => {
+                              const deadline = new Date(task.deadline);
+                              const now = task.endTime
+                                ? new Date(task.endTime)
+                                : new Date();
+                              const isOverdue = deadline < now;
+                              const diffDays = Math.floor(
+                                (now - deadline) / (1000 * 60 * 60 * 24),
+                              );
+
+                              return (
+                                <p
+                                  className={`deadline ${isOverdue && task.status !== "done" ? "overdue" : ""}`}
+                                >
+                                  📅 {deadline.toLocaleDateString()}
+                                  {isOverdue &&
+                                    task.status !== "done" &&
+                                    " ⚠️ Overdue"}
+                                  {isOverdue && task.status === "done" && (
+                                    <span style={{ color: "#f59e0b" }}>
+                                      {" "}
+                                      ⚠️ Was{" "}
+                                      {diffDays === 0
+                                        ? "overdue by less than a day"
+                                        : `overdue by ${diffDays} day${diffDays > 1 ? "s" : ""}`}
+                                    </span>
+                                  )}
+                                </p>
+                              );
+                            })()}
                           {task.timeSpent > 0 && (
                             <p>⏱️ {Math.round(task.timeSpent / 60)} mins</p>
                           )}
