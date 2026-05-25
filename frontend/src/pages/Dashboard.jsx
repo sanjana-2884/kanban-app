@@ -315,6 +315,7 @@ const Dashboard = () => {
           </ResponsiveContainer>
         </div>
       </div>
+
       {/* AI Insights */}
       <div style={{ marginBottom: "32px" }}>
         <h2
