@@ -124,6 +124,8 @@ const Board = () => {
           </select>
           <input
             type="date"
+            placeholder="Deadline Date"
+            title="Deadline Date"
             value={newTask.deadlineDate}
             onChange={(e) =>
               setNewTask({ ...newTask, deadlineDate: e.target.value })
@@ -131,6 +133,8 @@ const Board = () => {
           />
           <input
             type="time"
+            placeholder="Deadline Time"
+            title="Deadline Time"
             value={newTask.deadlineTime}
             onChange={(e) =>
               setNewTask({ ...newTask, deadlineTime: e.target.value })

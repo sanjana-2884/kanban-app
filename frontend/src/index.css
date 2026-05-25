@@ -300,3 +300,19 @@ body {
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
+
+input[type="date"]:before {
+  content: attr(title);
+  color: #64748b;
+  margin-right: 8px;
+}
+
+input[type="time"]:before {
+  content: attr(title);
+  color: #64748b;
+  margin-right: 8px;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
