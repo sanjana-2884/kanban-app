@@ -165,28 +165,51 @@ const Board = () => {
                                 ? new Date(task.endTime)
                                 : new Date();
                               const isOverdue = deadline < now;
+                              const diffMs = now - deadline;
                               const diffDays = Math.floor(
-                                (now - deadline) / (1000 * 60 * 60 * 24),
+                                diffMs / (1000 * 60 * 60 * 24),
+                              );
+                              const diffHours = Math.floor(
+                                (diffMs % (1000 * 60 * 60 * 24)) /
+                                  (1000 * 60 * 60),
+                              );
+                              const diffMins = Math.floor(
+                                (diffMs % (1000 * 60 * 60)) / (1000 * 60),
                               );
 
                               return (
-                                <p
-                                  className={`deadline ${isOverdue && task.status !== "done" ? "overdue" : ""}`}
+                                <div
+                                  style={{
+                                    fontSize: "11px",
+                                    color: "#94a3b8",
+                                    marginBottom: "6px",
+                                  }}
                                 >
-                                  📅 {deadline.toLocaleDateString()}
-                                  {isOverdue &&
-                                    task.status !== "done" &&
-                                    " ⚠️ Overdue"}
-                                  {isOverdue && task.status === "done" && (
-                                    <span style={{ color: "#f59e0b" }}>
-                                      {" "}
-                                      ⚠️ Was{" "}
-                                      {diffDays === 0
-                                        ? "overdue by less than a day"
-                                        : `overdue by ${diffDays} day${diffDays > 1 ? "s" : ""}`}
-                                    </span>
+                                  <p>
+                                    📅 Deadline: {deadline.toLocaleDateString()}
+                                  </p>
+                                  <p>
+                                    🕐 Created:{" "}
+                                    {new Date(task.createdAt).toLocaleString()}
+                                  </p>
+                                  {task.status === "done" && task.endTime && (
+                                    <p>
+                                      ✅ Completed:{" "}
+                                      {new Date(task.endTime).toLocaleString()}
+                                    </p>
                                   )}
-                                </p>
+                                  {isOverdue && task.status !== "done" && (
+                                    <p style={{ color: "#ef4444" }}>
+                                      ⚠️ Overdue
+                                    </p>
+                                  )}
+                                  {isOverdue && task.status === "done" && (
+                                    <p style={{ color: "#f59e0b" }}>
+                                      ⚠️ Was overdue by {diffDays}d {diffHours}h{" "}
+                                      {diffMins}m
+                                    </p>
+                                  )}
+                                </div>
                               );
                             })()}
                           {task.timeSpent > 0 && (
