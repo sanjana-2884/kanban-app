@@ -13,7 +13,8 @@ const Board = () => {
     title: "",
     description: "",
     priority: "Medium",
-    deadline: "",
+    deadlineDate: "",
+    deadlineTime: "",
   });
   const [showForm, setShowForm] = useState(false);
   const { user, logoutUser } = useAuth();
@@ -31,12 +32,16 @@ const Board = () => {
 
   const handleCreate = async () => {
     if (!newTask.title) return;
-    await createTask(newTask);
+    const deadline = newTask.deadlineDate
+      ? new Date(`${newTask.deadlineDate}T${newTask.deadlineTime || "23:59"}`)
+      : null;
+    await createTask({ ...newTask, deadline });
     setNewTask({
       title: "",
       description: "",
       priority: "Medium",
-      deadline: "",
+      deadlineDate: "",
+      deadlineTime: "",
     });
     setShowForm(false);
     fetchTasks();
@@ -118,10 +123,17 @@ const Board = () => {
             <option>High</option>
           </select>
           <input
-            type="datetime-local"
-            value={newTask.deadline}
+            type="date"
+            value={newTask.deadlineDate}
             onChange={(e) =>
-              setNewTask({ ...newTask, deadline: e.target.value })
+              setNewTask({ ...newTask, deadlineDate: e.target.value })
+            }
+          />
+          <input
+            type="time"
+            value={newTask.deadlineTime}
+            onChange={(e) =>
+              setNewTask({ ...newTask, deadlineTime: e.target.value })
             }
           />
           <button onClick={handleCreate}>Create Task</button>
