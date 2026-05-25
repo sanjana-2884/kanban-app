@@ -76,6 +76,16 @@ const Board = () => {
 
   const getColumnTasks = (status) => tasks.filter((t) => t.status === status);
 
+  const formatDate = (date) =>
+    new Date(date).toLocaleString("en-IN", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+
   return (
     <div className="board-container">
       <div className="board-header">
@@ -203,18 +213,14 @@ const Board = () => {
                                   }}
                                 >
                                   <p>
-                                    🕐 Created:{" "}
-                                    {new Date(task.createdAt).toLocaleString()}
+                                    🕐 Created: {formatDate(task.createdAt)}
                                   </p>
                                   <p>
-                                    <p>
-                                      📅 Deadline: {deadline.toLocaleString()}
-                                    </p>{" "}
+                                    📅 Deadline: {formatDate(task.deadline)}
                                   </p>
                                   {task.status === "done" && task.endTime && (
                                     <p>
-                                      ✅ Completed:{" "}
-                                      {new Date(task.endTime).toLocaleString()}
+                                      ✅ Completed: {formatDate(task.endTime)}
                                     </p>
                                   )}
                                   {isOverdue && (
@@ -236,9 +242,21 @@ const Board = () => {
                                 </div>
                               );
                             })()}
-                          {task.timeSpent > 0 && (
-                            <p>⏱️ {Math.round(task.timeSpent / 60)} mins</p>
-                          )}
+                          {task.timeSpent > 0 &&
+                            (() => {
+                              const totalSecs = task.timeSpent;
+                              const days = Math.floor(totalSecs / 86400);
+                              const hours = Math.floor(
+                                (totalSecs % 86400) / 3600,
+                              );
+                              const mins = Math.floor((totalSecs % 3600) / 60);
+                              const parts = [];
+                              if (days > 0) parts.push(`${days}d`);
+                              if (hours > 0) parts.push(`${hours}h`);
+                              if (mins > 0) parts.push(`${mins}m`);
+                              if (parts.length === 0) parts.push("< 1m");
+                              return <p>⏱️ Time spent: {parts.join(" ")}</p>;
+                            })()}
                           <button onClick={() => handleDelete(task._id)}>
                             🗑️
                           </button>
