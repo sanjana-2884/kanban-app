@@ -161,11 +161,12 @@ const Board = () => {
                           {task.deadline &&
                             (() => {
                               const deadline = new Date(task.deadline);
-                              const now = task.endTime
-                                ? new Date(task.endTime)
-                                : new Date();
-                              const isOverdue = deadline < now;
-                              const diffMs = now - deadline;
+                              const compareTime =
+                                task.status === "done" && task.endTime
+                                  ? new Date(task.endTime)
+                                  : new Date();
+                              const isOverdue = deadline < compareTime;
+                              const diffMs = compareTime - deadline;
                               const diffDays = Math.floor(
                                 diffMs / (1000 * 60 * 60 * 24),
                               );
@@ -186,11 +187,13 @@ const Board = () => {
                                   }}
                                 >
                                   <p>
-                                    📅 Deadline: {deadline.toLocaleDateString()}
-                                  </p>
-                                  <p>
                                     🕐 Created:{" "}
                                     {new Date(task.createdAt).toLocaleString()}
+                                  </p>
+                                  <p>
+                                    <p>
+                                      📅 Deadline: {deadline.toLocaleString()}
+                                    </p>{" "}
                                   </p>
                                   {task.status === "done" && task.endTime && (
                                     <p>
@@ -198,15 +201,20 @@ const Board = () => {
                                       {new Date(task.endTime).toLocaleString()}
                                     </p>
                                   )}
-                                  {isOverdue && task.status !== "done" && (
-                                    <p style={{ color: "#ef4444" }}>
-                                      ⚠️ Overdue
-                                    </p>
-                                  )}
-                                  {isOverdue && task.status === "done" && (
-                                    <p style={{ color: "#f59e0b" }}>
-                                      ⚠️ Was overdue by {diffDays}d {diffHours}h{" "}
-                                      {diffMins}m
+                                  {isOverdue && (
+                                    <p
+                                      style={{
+                                        color:
+                                          task.status === "done"
+                                            ? "#f59e0b"
+                                            : "#ef4444",
+                                      }}
+                                    >
+                                      ⚠️{" "}
+                                      {task.status === "done"
+                                        ? "Was overdue"
+                                        : "Overdue"}{" "}
+                                      by {diffDays}d {diffHours}h {diffMins}m
                                     </p>
                                   )}
                                 </div>
