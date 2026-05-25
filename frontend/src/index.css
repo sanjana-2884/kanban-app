@@ -29,22 +29,33 @@ body {
 }
 
 .auth-container input {
-  padding: 12px;
-  border-radius: 8px;
+  padding: 14px 16px;
+  border-radius: 10px;
   border: 1px solid #334155;
   background: #0f172a;
   color: #e2e8f0;
   font-size: 14px;
+  width: 100%;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.auth-container input:focus {
+  border-color: #6366f1;
 }
 
 .auth-container button {
-  padding: 12px;
+  padding: 14px;
   background: #6366f1;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  transition: background 0.2s;
+  margin-top: 8px;
 }
 
 .auth-container button:hover {
@@ -53,6 +64,18 @@ body {
 
 .auth-container a {
   color: #6366f1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-container a:hover {
+  text-decoration: underline;
+}
+
+.auth-container p {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 14px;
 }
 
 .error {
