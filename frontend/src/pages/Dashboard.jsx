@@ -317,7 +317,8 @@ const Dashboard = () => {
       </div>
 
       {/* AI Insights */}
-      <div style={{ marginBottom: "32px" }}>
+      <div style={{ marginBottom: "32px", marginTop: "32px" }}>
+        {" "}
         <h2
           style={{
             color: "#94a3b8",
