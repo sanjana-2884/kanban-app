@@ -54,7 +54,6 @@ A full-stack Kanban-based task management web application with an AI-like analyt
 | Backend | Node.js, Express |
 | Database | MongoDB Atlas, Mongoose |
 | Auth | JWT, bcryptjs |
-| HTTP Client | Axios |
 | Deployment | Vercel (frontend), Render (backend) |
 
 ---
