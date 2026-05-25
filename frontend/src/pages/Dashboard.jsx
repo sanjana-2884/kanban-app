@@ -277,42 +277,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* AI Insights */}
-      <div style={{ marginBottom: "32px" }}>
-        <h2
-          style={{
-            color: "#94a3b8",
-            marginBottom: "16px",
-            fontSize: "16px",
-            textTransform: "uppercase",
-            letterSpacing: "1px",
-          }}
-        >
-          🤖 AI Insights
-        </h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          {insights.map((insight, i) => (
-            <div
-              key={i}
-              style={{
-                background: insightColors[insight.type].bg,
-                border: `1px solid ${insightColors[insight.type].border}`,
-                borderRadius: "10px",
-                padding: "14px 18px",
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                fontSize: "14px",
-                color: "#e2e8f0",
-              }}
-            >
-              <span style={{ fontSize: "20px" }}>{insight.icon}</span>
-              <span>{insight.text}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Charts */}
       <div className="charts">
         <div className="chart-box">
@@ -349,6 +313,41 @@ const Dashboard = () => {
               <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
+        </div>
+      </div>
+      {/* AI Insights */}
+      <div style={{ marginBottom: "32px" }}>
+        <h2
+          style={{
+            color: "#94a3b8",
+            marginBottom: "16px",
+            fontSize: "16px",
+            textTransform: "uppercase",
+            letterSpacing: "1px",
+          }}
+        >
+          🤖 AI Insights
+        </h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          {insights.map((insight, i) => (
+            <div
+              key={i}
+              style={{
+                background: insightColors[insight.type].bg,
+                border: `1px solid ${insightColors[insight.type].border}`,
+                borderRadius: "10px",
+                padding: "14px 18px",
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                fontSize: "14px",
+                color: "#e2e8f0",
+              }}
+            >
+              <span style={{ fontSize: "20px" }}>{insight.icon}</span>
+              <span>{insight.text}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
