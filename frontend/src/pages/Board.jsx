@@ -95,6 +95,10 @@ const Board = () => {
           <button onClick={() => navigate("/dashboard")}>Dashboard</button>
           <button
             onClick={() => {
+              const confirmed = window.confirm(
+                "Are you sure you want to logout?",
+              );
+              if (!confirmed) return;
               logoutUser();
               navigate("/login");
             }}
