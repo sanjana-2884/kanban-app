@@ -48,12 +48,12 @@ A full-stack Kanban-based task management web application with an AI-like analyt
 
 | Layer | Technology |
 |---|---|
-| Frontend | React 19, Vite, React Router DOM |
-| Drag & Drop | @hello-pangea/dnd |
-| Charts | Recharts |
 | Backend | Node.js, Express |
 | Database | MongoDB Atlas, Mongoose |
 | Auth | JWT, bcryptjs |
+| Frontend | React 19, Vite, React Router DOM |
+| Drag & Drop | @hello-pangea/dnd |
+| Charts | Recharts |
 | Deployment | Vercel (frontend), Render (backend) |
 
 ---
